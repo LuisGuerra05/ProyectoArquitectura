@@ -1,0 +1,27 @@
+@startuml EpicKick_Context
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+' === Actores ===
+Person(Cliente, "Cliente (Usuario final)", "Fanático del fútbol que interactúa con la aplicación")
+
+' === Sistema principal ===
+System(Sistema, "Epic Kick Web App", "Aplicación de e-commerce en React + Node.js/Express")
+
+' === Servicios externos ===
+System_Ext(Cloudinary, "Cloudinary", "Servicio externo de almacenamiento y entrega de imágenes")
+System_Ext(Algolia, "Algolia", "Motor de búsqueda rápida y filtrado dinámico")
+System_Ext(OpenAI, "OpenAI API", "Moderación automática de comentarios")
+System_Ext(AuthApps, "Authenticator Apps", "Apps 2FA para códigos temporales")
+System_Ext(Infra, "Azure + AWS", "Infraestructura cloud para frontend/backend y base de datos")
+
+' === Relaciones ===
+Rel(Cliente, Sistema, "Navega, se autentica y realiza compras")
+Rel(Sistema, Cloudinary, "Carga y entrega de imágenes")
+Rel(Sistema, Algolia, "Consultas y filtrado del catálogo")
+Rel(Sistema, OpenAI, "Análisis semántico de comentarios")
+Rel(Sistema, AuthApps, "Validación de códigos 2FA")
+Rel(Sistema, Infra, "Despliegue y almacenamiento")
+
+@enduml
