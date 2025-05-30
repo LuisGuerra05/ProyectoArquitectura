@@ -1,0 +1,76 @@
+@startuml EpicKick_Enterprise_Layers_7
+
+skinparam rectangle {
+  RoundCorner 15
+  BackgroundColor<<Estrategia>> #e1d5e7
+  BackgroundColor<<Proceso>> #dae8fc
+  BackgroundColor<<Servicio>> #f8f8f8
+  BackgroundColor<<Aplicacion>> #d5e8d4
+  BackgroundColor<<Datos>> #fff2cc
+  BackgroundColor<<Infra>> #f8cecc
+  BackgroundColor<<Soporte>> #e2efda
+  BorderColor black
+}
+skinparam shadowing true
+skinparam defaultTextAlignment center
+
+title Diagrama de Capas - Arquitectura Empresarial de Epic Kick (7 Capas)
+
+' ===== Capa 1: Estrategia =====
+package "Capa 1: Estrategia" <<Estrategia>> {
+  rectangle "Vender camisetas\noficiales"
+  rectangle "Fidelizar clientes"
+  rectangle "Incrementar recurrencia"
+  rectangle "Mejorar experiencia\nde usuario"
+}
+
+' ===== Capa 2: Procesos del Negocio =====
+package "Capa 2: Procesos del Negocio" <<Proceso>> {
+  rectangle "Exploración y búsqueda\nde camisetas"
+  rectangle "Registro y login\n(2FA incluido)"
+  rectangle "Gestión del carrito\nde compras"
+  rectangle "Evaluación y\nreseñas de productos"
+}
+
+' ===== Capa 3: Servicios Funcionales =====
+package "Capa 3: Servicios Funcionales" <<Servicio>> {
+  rectangle "Autenticación 2FA"
+  rectangle "Motor de búsqueda\n(Algolia)"
+  rectangle "Moderación de contenido\n(OpenAI API)"
+  rectangle "Carrito persistente"
+}
+
+' ===== Capa 4: Aplicaciones =====
+package "Capa 4: Aplicaciones" <<Aplicacion>> {
+  rectangle "Frontend React\n(App Web SPA)"
+  rectangle "Backend Node.js/Express\n(API RESTful)"
+  rectangle "Middleware de búsqueda\n(Algolia)"
+  rectangle "Rutas protegidas\n& controladores"
+}
+
+' ===== Capa 5: Datos =====
+package "Capa 5: Datos" <<Datos>> {
+  rectangle "Base de datos\nMySQL (AWS RDS)"
+  rectangle "Almacenamiento de imágenes\nCloudinary"
+  rectangle "Índices de búsqueda\nAlgolia"
+  rectangle "Configuraciones 2FA\ny JWT"
+}
+
+' ===== Capa 6: Infraestructura =====
+package "Capa 6: Infraestructura" <<Infra>> {
+  rectangle "Azure Web Apps\n(Backend)"
+  rectangle "AWS RDS\n(Base de datos)"
+  rectangle "Cloudinary\n(CDN imágenes)"
+  rectangle "Algolia / OpenAI\n(Servicios externos)"
+}
+
+' ===== Capa 7: Seguridad y Soporte =====
+package "Capa 7: Seguridad y Soporte" <<Soporte>> {
+  rectangle "JWT"
+  rectangle "Bcrypt + salt + pepper"
+  rectangle "2FA (Google Authenticator)"
+  rectangle "CI/CD (GitHub Actions)"
+  rectangle "Separación de entornos"
+}
+
+@enduml
