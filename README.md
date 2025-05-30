@@ -16,7 +16,7 @@ Repositorio original del proyecto:
 - Aplicación básica del método ATAM.
 - Identificación de brechas y oportunidades de mejora.
 
-[Informe Entrega 1 - Análisis As-Is](#) ← *(Se agregará enlace al PDF en el repositorio)*
+[Informe Entrega 1 - Análisis As-Is](https://drive.google.com/drive/folders/1_oAtuhclpUZ0t1yeIADzjhQ6AqoiZVm0?usp=sharing)
 
 ---
 
