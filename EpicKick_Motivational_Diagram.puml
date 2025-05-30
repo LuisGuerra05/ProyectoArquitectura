@@ -1,0 +1,69 @@
+@startuml EpicKick_Motivational_Diagram
+
+skinparam rectangle {
+  Shadowing false
+  BackgroundColor White
+  BorderColor Black
+}
+
+title Diagrama Motivacional - Epic Kick
+
+' === Actores ===
+actor Af as "Aficionados del fútbol"
+actor Dc as "Dueño del comercio"
+actor Dev as "Equipo de desarrollo"
+actor Prov as "Proveedores de camisetas"
+actor Soporte as "Equipo de soporte al cliente"
+
+' === Drivers ===
+rectangle "Pasión por el fútbol" as D1
+rectangle "Fidelizar clientes" as D2
+rectangle "Producto funcional y seguro" as D3
+rectangle "Expandir ventas digitales" as D4
+rectangle "Atención eficiente al cliente" as D5
+
+' === Metas ===
+rectangle "Comprar camisetas oficiales" as M1
+rectangle "Captar clientes recurrentes" as M2
+rectangle "Desplegar app estable" as M3
+rectangle "Aumentar pedidos online" as M4
+rectangle "Mantener satisfacción del cliente" as M5
+
+' === Requerimientos y Restricciones ===
+rectangle "Interfaz rápida e intuitiva" as R1
+rectangle "Stock y conexión limitada" as C1
+rectangle "Plataforma escalable y analítica" as R2
+rectangle "Tiempo y presupuesto" as C2
+rectangle "CI/CD, modularidad, testing" as R3
+rectangle "Recursos limitados" as C3
+rectangle "Integración con inventario" as R4
+rectangle "Problemas logísticos" as C4
+rectangle "Panel de pedidos interno" as R5
+rectangle "Alta carga de atención" as C5
+
+' === Relaciones con etiquetas ===
+Af --> D1 : motivado por
+D1 --> M1 : impulsa
+M1 --> R1 : requiere
+M1 --> C1 : limitado por
+
+Dc --> D2 : motivado por
+D2 --> M2 : impulsa
+M2 --> R2 : requiere
+M2 --> C2 : limitado por
+
+Dev --> D3 : motivado por
+D3 --> M3 : impulsa
+M3 --> R3 : requiere
+M3 --> C3 : limitado por
+
+Prov --> D4 : motivado por
+D4 --> M4 : impulsa
+M4 --> R4 : requiere
+M4 --> C4 : limitado por
+
+Soporte --> D5 : motivado por
+D5 --> M5 : impulsa
+M5 --> R5 : requiere
+M5 --> C5 : limitado por
+@enduml
