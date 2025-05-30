@@ -1,0 +1,38 @@
+@startuml EpicKick_Components
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+LAYOUT_WITH_LEGEND()
+
+' === Contenedor principal: Backend Node.js + Express ===
+Container(backend, "Backend API", "Node.js + Express", "Maneja la lógica de negocio, autenticación, productos, reseñas y carritos")
+
+Component(authController, "Auth Controller", "Controlador", "Maneja login, registro y 2FA")
+Component(productController, "Product Controller", "Controlador", "Gestiona productos, imágenes y catálogo")
+Component(cartController, "Cart Controller", "Controlador", "Manejo del carrito de compras")
+Component(reviewController, "Review Controller", "Controlador", "Creación y moderación de reseñas")
+Component(searchMiddleware, "Search Middleware", "Middleware", "Integra con Algolia para búsqueda en tiempo real")
+
+ContainerDb(db, "Base de Datos", "MySQL (AWS RDS)", "Almacena usuarios, productos, carritos, reseñas")
+
+System_Ext(cloudinary, "Cloudinary", "Servicio externo", "Almacena y entrega imágenes de productos")
+System_Ext(algolia, "Algolia", "Servicio externo", "Indexa productos para búsqueda")
+System_Ext(openai, "OpenAI API", "Servicio externo", "Modera reseñas con IA")
+System_Ext(authApps, "Apps 2FA", "Servicio externo", "Google Authenticator u otras apps para validar código 2FA")
+
+' === Relaciones internas ===
+Rel(authController, db, "Lee/Escribe", "Usuarios y credenciales")
+Rel(productController, db, "Lee/Escribe", "Productos y stock")
+Rel(cartController, db, "Lee/Escribe", "Carrito de compras")
+Rel(reviewController, db, "Lee/Escribe", "Reseñas")
+Rel(reviewController, openai, "Envía texto", "Moderación con IA")
+Rel(productController, cloudinary, "Sube y accede", "Imágenes de productos")
+Rel(searchMiddleware, algolia, "Consulta / Indexa", "Productos para búsqueda")
+Rel(authController, authApps, "Solicita verificación", "Código 2FA")
+
+' === Conexión general con contenedor ===
+Rel(backend, authController, "Usa")
+Rel(backend, productController, "Usa")
+Rel(backend, cartController, "Usa")
+Rel(backend, reviewController, "Usa")
+Rel(backend, searchMiddleware, "Usa")
+
+@enduml

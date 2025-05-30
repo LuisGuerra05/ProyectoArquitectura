@@ -1,0 +1,45 @@
+@startuml EpicKick_Enterprise_Layers
+
+skinparam rectangle {
+  RoundCorner 15
+  BackgroundColor<<Proceso>> #dae8fc
+  BackgroundColor<<Aplicacion>> #d5e8d4
+  BackgroundColor<<Datos>> #fff2cc
+  BackgroundColor<<Infra>> #f8cecc
+  BorderColor black
+}
+skinparam shadowing true
+skinparam defaultTextAlignment center
+
+title Diagrama de Capas - Arquitectura Empresarial de Epic Kick
+
+package "Capa de Procesos del Negocio" <<Proceso>> {
+  rectangle "Exploración y búsqueda\nde camisetas"
+  rectangle "Registro y login\n(2FA incluido)"
+  rectangle "Gestión del carrito\nde compras"
+  rectangle "Evaluación y\nreseñas de productos"
+}
+
+package "Capa de Aplicaciones" <<Aplicacion>> {
+  rectangle "Frontend React\n(App Web SPA)"
+  rectangle "Backend Node.js/Express\n(API RESTful)"
+  rectangle "Middleware de Búsqueda\n(Algolia)"
+  rectangle "Moderación automática\n(OpenAI API)"
+}
+
+package "Capa de Datos" <<Datos>> {
+  rectangle "Base de datos\nMySQL (AWS RDS)"
+  rectangle "Almacenamiento de imágenes\nCloudinary"
+  rectangle "Índices de búsqueda\nAlgolia"
+}
+
+package "Capa de Infraestructura" <<Infra>> {
+  rectangle "Azure Web Apps\n(Backend hosting)"
+  rectangle "AWS RDS\n(Base de datos)"
+  rectangle "Cloudinary\n(CDN de imágenes)"
+  rectangle "Algolia\n(Búsqueda externa)"
+  rectangle "OpenAI API\n(Moderación)"
+  rectangle "Apps de Autenticación\n(2FA)"
+}
+
+@enduml
