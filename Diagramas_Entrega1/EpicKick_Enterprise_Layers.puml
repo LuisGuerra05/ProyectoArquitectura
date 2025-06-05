@@ -42,4 +42,26 @@ package "Capa de Infraestructura" <<Infra>> {
   rectangle "Apps de Autenticación\n(2FA)"
 }
 
+' === Procesos → Aplicaciones ===
+"Exploración y búsqueda\nde camisetas" --> "Middleware de Búsqueda\n(Algolia)"
+"Registro y login\n(2FA incluido)" --> "Backend Node.js/Express\n(API RESTful)"
+"Gestión del carrito\nde compras" --> "Backend Node.js/Express\n(API RESTful)"
+"Evaluación y\nreseñas de productos" --> "Moderación automática\n(OpenAI API)"
+
+' === Aplicaciones → Datos ===
+"Middleware de Búsqueda\n(Algolia)" --> "Índices de búsqueda\nAlgolia"
+"Backend Node.js/Express\n(API RESTful)" --> "Base de datos\nMySQL (AWS RDS)"
+"Backend Node.js/Express\n(API RESTful)" --> "Almacenamiento de imágenes\nCloudinary"
+"Moderación automática\n(OpenAI API)" --> "Base de datos\nMySQL (AWS RDS)"
+
+' === Datos → Infraestructura ===
+"Base de datos\nMySQL (AWS RDS)" --> "AWS RDS\n(Base de datos)"
+"Almacenamiento de imágenes\nCloudinary" --> "Cloudinary\n(CDN de imágenes)"
+"Índices de búsqueda\nAlgolia" --> "Algolia\n(Búsqueda externa)"
+
+' === Aplicaciones → Infraestructura (externas directas) ===
+"Moderación automática\n(OpenAI API)" --> "OpenAI API\n(Moderación)"
+"Backend Node.js/Express\n(API RESTful)" --> "Azure Web Apps\n(Backend hosting)"
+"Backend Node.js/Express\n(API RESTful)" --> "Apps de Autenticación\n(2FA)"
+
 @enduml

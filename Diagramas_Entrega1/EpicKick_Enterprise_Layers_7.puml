@@ -73,4 +73,42 @@ package "Capa 7: Seguridad y Soporte" <<Soporte>> {
   rectangle "Separación de entornos"
 }
 
+' === Relación Estrategia -> Procesos ===
+"Vender camisetas\noficiales" --> "Exploración y búsqueda\nde camisetas"
+"Fidelizar clientes" --> "Evaluación y\nreseñas de productos"
+"Mejorar experiencia\nde usuario" --> "Gestión del carrito\nde compras"
+"Incrementar recurrencia" --> "Registro y login\n(2FA incluido)"
+
+' === Relación Procesos -> Servicios ===
+"Registro y login\n(2FA incluido)" --> "Autenticación 2FA"
+"Exploración y búsqueda\nde camisetas" --> "Motor de búsqueda\n(Algolia)"
+"Evaluación y\nreseñas de productos" --> "Moderación de contenido\n(OpenAI API)"
+"Gestión del carrito\nde compras" --> "Carrito persistente"
+
+' === Servicios -> Aplicaciones ===
+"Motor de búsqueda\n(Algolia)" --> "Middleware de búsqueda\n(Algolia)"
+"Autenticación 2FA" --> "Rutas protegidas\n& controladores"
+"Carrito persistente" --> "Backend Node.js/Express\n(API RESTful)"
+"Moderación de contenido\n(OpenAI API)" --> "Backend Node.js/Express\n(API RESTful)"
+
+' === Aplicaciones -> Datos ===
+"Backend Node.js/Express\n(API RESTful)" --> "Base de datos\nMySQL (AWS RDS)"
+"Middleware de búsqueda\n(Algolia)" --> "Índices de búsqueda\nAlgolia"
+"Rutas protegidas\n& controladores" --> "Configuraciones 2FA\ny JWT"
+"Frontend React\n(App Web SPA)" --> "Almacenamiento de imágenes\nCloudinary"
+
+' === Datos -> Infraestructura ===
+"Base de datos\nMySQL (AWS RDS)" --> "AWS RDS\n(Base de datos)"
+"Almacenamiento de imágenes\nCloudinary" --> "Cloudinary\n(CDN imágenes)"
+"Índices de búsqueda\nAlgolia" --> "Algolia / OpenAI\n(Servicios externos)"
+"Configuraciones 2FA\ny JWT" --> "Azure Web Apps\n(Backend)"
+
+' === Seguridad y Soporte relaciones ===
+"JWT" --> "Rutas protegidas\n& controladores"
+"Bcrypt + salt + pepper" --> "Rutas protegidas\n& controladores"
+"2FA (Google Authenticator)" --> "Autenticación 2FA"
+"CI/CD (GitHub Actions)" --> "Azure Web Apps\n(Backend)"
+"Separación de entornos" --> "Frontend React\n(App Web SPA)"
+
+
 @enduml
