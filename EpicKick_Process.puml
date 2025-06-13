@@ -1,0 +1,15 @@
+@startuml EpicKick_Process
+title Arquitectura de Procesos - Compra de Camiseta
+
+start
+:Explorar catálogo;
+:Filtrar/Búsqueda avanzada;
+:Ver producto;
+:Agregar al carrito;
+:Login + 2FA;
+:Seleccionar método de pago;
+:Confirmar compra;
+:Habilitar reseña (solo usuarios compradores);
+stop
+
+@enduml
