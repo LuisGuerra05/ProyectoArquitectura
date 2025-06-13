@@ -28,7 +28,7 @@ Repositorio original del proyecto:
 - Implementación de patrones de diseño y mejoras de código.
 - Conclusiones y aprendizajes.
 
-[Informe Entrega 2 - Propuesta To-Be](#) ← *(Se agregará enlace al PDF cuando esté listo)*
+[Informe Entrega 2 - Propuesta To-Be](https://drive.google.com/drive/folders/1_oAtuhclpUZ0t1yeIADzjhQ6AqoiZVm0?usp=sharing) 
 
 ---
 

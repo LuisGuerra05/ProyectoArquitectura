@@ -1,0 +1,56 @@
+@startuml EpicKick_Infrastructure_ToBe
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+LAYOUT_WITH_LEGEND()
+
+' Actores
+Person(usuario, "Usuario Final")
+Person(admin, "Administrador")
+
+System_Boundary(epickick, "Infraestructura - Epic Kick") {
+
+  Container(lb, "Balanceador de Carga", "NGINX / Azure ELB", "Redirige el tráfico hacia los contenedores disponibles.")
+
+  Container(frontend, "Frontend Web", "React (Docker)", "Interfaz principal para los usuarios.")
+  Container(adminpanel, "Panel Admin", "React (Docker)", "Gestión interna del sistema.")
+  Container(backend, "Backend API", "Node.js + Express (Docker)", "Orquesta operaciones, conecta con DB y servicios externos.")
+
+  ContainerDb(db, "Base de Datos", "MySQL (AWS RDS)", "Almacena usuarios, productos, compras y reseñas.")
+
+  Container(ci, "GitHub Actions", "CI/CD", "Despliegue automatizado de los contenedores.")
+
+  System_Ext(cloudinary, "Cloudinary", "CDN externo", "Almacenamiento y entrega de imágenes.")
+  System_Ext(algolia, "Algolia", "Servicio externo", "Motor de búsqueda indexada.")
+  System_Ext(monitoring, "LogRocket / Sentry", "Monitoreo", "Captura errores y comportamiento.")
+  System_Ext(payment, "Stripe / MercadoPago", "Pasarela de pago", "Procesamiento de pagos seguros.")
+}
+
+' Conexiones desde usuarios
+Rel(usuario, lb, "Accede")
+Rel(admin, lb, "Accede")
+
+' Balanceador distribuye
+Rel(lb, frontend, "Redirige tráfico")
+Rel(lb, adminpanel, "Redirige tráfico")
+Rel(lb, backend, "Redirige tráfico")
+
+' Aplicaciones se comunican con backend
+Rel(frontend, backend, "Invoca operaciones")
+Rel(adminpanel, backend, "Administra datos")
+
+' Backend con servicios externos
+Rel(backend, db, "Acceso a datos")
+Rel(backend, cloudinary, "Carga / Accede imágenes")
+Rel(backend, algolia, "Consulta / Indexa productos")
+Rel(backend, monitoring, "Envío de métricas")
+Rel(backend, payment, "Procesa pagos")
+
+' Frontend y panel también monitorean
+Rel(frontend, monitoring, "Registra errores")
+Rel(adminpanel, monitoring, "Registra errores")
+
+' CI/CD
+Rel(ci, frontend, "Despliega")
+Rel(ci, adminpanel, "Despliega")
+Rel(ci, backend, "Despliega")
+
+@enduml

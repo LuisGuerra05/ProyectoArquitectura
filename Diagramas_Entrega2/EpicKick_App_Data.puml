@@ -1,0 +1,59 @@
+@startuml EpicKick_AppData_ToBe
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+LAYOUT_WITH_LEGEND()
+
+' === Actores ===
+Person(usuario, "Usuario Final", "Accede al sitio web para explorar y comprar camisetas")
+Person(admin, "Administrador", "Gestiona catálogo y monitorea el sistema")
+
+' === Sistema Epic Kick ===
+System_Boundary(epickick, "Epic Kick") {
+    
+    Container(frontend, "Frontend Web", "React", "Interfaz SPA para usuarios finales")
+    Container(adminPanel, "Panel de Administración", "React", "Interfaz interna para gestión de catálogo")
+    
+    Container(authService, "Auth Service", "Node.js (Microservicio)", "Maneja login, registro, 2FA y recuperación")
+    Container(productService, "Product Service", "Node.js (Microservicio)", "Gestión del catálogo y productos")
+    Container(cartService, "Cart Service", "Node.js (Microservicio)", "Gestión del carrito de compras")
+    Container(reviewService, "Review Service", "Node.js (Microservicio)", "Gestión de reseñas y moderación")
+    Container(paymentService, "Payment Service", "Node.js (Microservicio)", "Gestión de pagos y validación de transacciones")
+    Container(searchMiddleware, "Search Middleware", "Express", "Mediador para consultas con Algolia")
+    
+    ContainerDb(mysql, "Base de Datos", "MySQL (AWS RDS)", "Almacena usuarios, productos, reseñas, compras")
+}
+
+' === Sistemas externos ===
+System_Ext(algolia, "Algolia", "Servicio externo", "Motor de búsqueda indexado")
+System_Ext(cloudinary, "Cloudinary", "Servicio externo", "CDN para imágenes")
+System_Ext(pagos, "Stripe / MercadoPago", "Servicio externo", "Pasarela de pagos")
+System_Ext(monitor, "Sentry / LogRocket", "Servicio externo", "Monitoreo y trazabilidad")
+
+' === Relaciones usuarios ===
+Rel(usuario, frontend, "Interacción web")
+Rel(admin, adminPanel, "Gestión")
+
+' === Conexiones internas ===
+Rel(frontend, authService, "Solicita login/registro/2FA")
+Rel(frontend, productService, "Consulta productos")
+Rel(frontend, cartService, "Administra carrito")
+Rel(frontend, reviewService, "Crea y ve reseñas")
+Rel(frontend, paymentService, "Solicita pago")
+Rel(frontend, searchMiddleware, "Consulta búsqueda")
+
+Rel(adminPanel, productService, "Gestiona productos")
+Rel(adminPanel, reviewService, "Monitorea reseñas")
+
+' === Integraciones externas ===
+Rel(authService, mysql, "Lee/Escribe")
+Rel(productService, mysql, "Lee/Escribe")
+Rel(cartService, mysql, "Lee/Escribe")
+Rel(reviewService, mysql, "Lee/Escribe")
+Rel(paymentService, mysql, "Lee/Escribe")
+
+Rel(searchMiddleware, algolia, "Consulta / indexa")
+Rel(productService, cloudinary, "Carga/lee imágenes")
+Rel(paymentService, pagos, "Procesa pagos")
+Rel(frontend, monitor, "Envia errores y eventos")
+Rel(adminPanel, monitor, "Monitorea actividades")
+
+@enduml
